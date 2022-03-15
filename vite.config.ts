@@ -28,7 +28,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/assets/sass/mixin.scss";`, // 这里结尾需要添加一个 ;
+        additionalData: `@import "@/assets/sass/index.scss";`, // 这里结尾需要添加一个 ;
       },
     },
   },
