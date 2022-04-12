@@ -20,4 +20,4 @@ function getName(name) {
     console.log(name, '💦 name')
 }
 
-callBack({name: 'IU'}, getName)
+callBack({name: 'yoona'}, getName)
