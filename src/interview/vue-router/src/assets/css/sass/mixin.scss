@@ -1,0 +1,107 @@
+@mixin children-page($image) {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-image: $image;
+}
+
+/* A02查看详情 完整按钮*/
+@mixin complete-btn() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 631px;
+  height: 68px;
+  background: #3184fe;
+  border-radius: 40.5px;
+  border: 0;
+  color: #f0f6fe;
+}
+
+/* A02查看详情 左边编辑按钮*/
+@mixin left-btn() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 263px;
+  height: 68px;
+  background: #ffffff;
+  border-radius: 40.5px;
+  border: 1px solid #3184fe;
+  color: #3d8bfe;
+}
+
+/* A02查看详情 右边查看详情按钮*/
+@mixin right-btn() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 338px;
+  height: 68px;
+  background: #3184fe;
+  border-radius: 40.5px;
+  border: 0;
+  color: #f1f6fe;
+}
+
+/* A02-1 缺省页背景 */
+@mixin no-data() {
+  box-sizing: border-box;
+  position: relative;
+  width: 690px;
+  height: 920px;
+  background: #ffffff;
+  margin: 30px 30px 0 30px;
+  padding: 240px 0 0 133px;
+  box-shadow: 0 2px 10px 0 rgba(68, 83, 105, 0.1);
+  border-radius: 16px;
+
+  .no-data-img {
+    width: 424px;
+    height: 356px;
+
+    background-image: url('~@/assets/uploads/no-data.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .no-data-text {
+    color: #a4a4a4;
+    font-size: 28px;
+    position: absolute;
+    top: 526px;
+    left: 292px;
+  }
+}
+
+/* css 吸顶效果 */
+@mixin stay-top() {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+
+/* A04-1 底部 暂存 下一步 */
+@mixin container-bottom() {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 140px;
+  background-color: #fff;
+
+  .container-bottom-left-btn {
+    @include left-btn();
+    width: 200px;
+    margin: 0 40px 0 30px;
+  }
+
+  .container-bottom-right-btn {
+    @include right-btn();
+    width: 450px;
+  }
+}
