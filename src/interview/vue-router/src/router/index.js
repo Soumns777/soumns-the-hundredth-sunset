@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/users'
   },
   {
     path: '/home',
@@ -46,17 +46,43 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: () => import('@/views/tab/profile.vue'),
-        children: [
-          {
-           path:''
-          }
-        ]
       },
 
     ]
-  }
+  },
+
+  {
+    path: '/users',
+    name: 'users',
+    component: () => import('@/views/users/index.vue'),
+    props: true,
+    children: [
+      {
+        path: '/',
+        redirect: {name: 'child'}
+      },
+      {
+        path: '/child',
+        name: 'child',
+        component: () => import('@/views/users/child1.vue'),
+        props: true
+      },
+      {
+        path: '/otherChild',
+        name: 'otherChild',
+        components: {
+          default: () => import('@/views/users/child2.vue'),
+          childs: () => import('@/views/users/child3.vue'),
+        },
+        props: true
+      },
+
+    ]
+  },
+
 
 ]
+
 
 const router = new VueRouter({
   mode: 'history',

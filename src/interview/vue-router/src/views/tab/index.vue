@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     Tab
-
     <router-view></router-view>
   </div>
 </template>
