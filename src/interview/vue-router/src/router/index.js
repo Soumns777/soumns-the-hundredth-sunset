@@ -12,10 +12,11 @@ const routes = [
     path: '/home',
     name: 'home',
     component: () => import('@/views/home/index.vue'),
-    props: {
-      newsletterPopup: true,
-      userName: 'iu'
-    },
+    // props: {
+    //   newsletterPopup: true,
+    //   userName: 'iu'
+    // },
+    props: true
   },
   {
     path: '/list/:list/:test',
@@ -45,6 +46,11 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: () => import('@/views/tab/profile.vue'),
+        children: [
+          {
+           path:''
+          }
+        ]
       },
 
     ]

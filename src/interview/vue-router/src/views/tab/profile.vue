@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     profile
+
   </div>
 </template>
 
@@ -20,14 +21,12 @@ export default {
 </script>
 <style scoped lang="scss">
 
-//.container {
-//  width: 100vw;
-//  min-height: 100vh;
-//
-//  .right-btn {
-//    @include right-btn();
-//    margin-bottom: 30px;
-//  }
-//}
+.container {
+  width: 100vw;
+  min-height: 100vh;
+
+
+  @include children-page()
+}
 
 </style>
