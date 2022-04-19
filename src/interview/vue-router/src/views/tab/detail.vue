@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     detail
-
-
     <!-- router-link中的 :to 类似于 $router.push()   -->
     <router-link class="right-btn" :to="{name:'home',params:{userName:'kystal'}}">home</router-link>
   </div>

@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <button class="right-btn" @click="$router.push({name:'home',params:{ home:'home' }})">List-path-query</button>
+
+
+    <button class="right-btn" @click="$router.push({name:'list',params:{ list:'list',test:'777',invildList:'888'}})">
+      beforeRouteUpdate
+    </button>
   </div>
 </template>
 
@@ -23,6 +28,14 @@ export default {
       require: true,
       type: String
     }
+  },
+  /**
+   * 组件守卫 beforeRouteUpdate
+   */
+  beforeRouteUpdate(to, from, next) {
+    console.log(to, from, '💛  组件守卫:beforeRouteUpdate')
+    console.log(this, '💛  this实例')
+    next()
   },
   mounted() {
     console.log(this.$route.params, '💛 home路由params传过来的参数')

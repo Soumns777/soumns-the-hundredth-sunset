@@ -43,10 +43,6 @@ export default {
       require: true
     }
   },
-  beforeRouteLeave(to, from, next) {
-    console.log(to, '💜 home beforeRouteEnter')
-    next()
-  },
   mounted() {
     // console.log(this.$route.query, '💚 list 路由query传过来的参数')
     console.log(this.home, '💚 list 路由params传过来的参数') // home

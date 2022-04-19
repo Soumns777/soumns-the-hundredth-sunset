@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/users'
+    redirect: '/home'
   },
   {
     path: '/home',
@@ -16,7 +16,11 @@ const routes = [
     //   newsletterPopup: true,
     //   userName: 'iu'
     // },
-    props: true
+    props: true,
+    meta: {
+      isKeepAlive: true,
+      requiresAuth: true
+    }
   },
   {
     path: '/list/:list/:test',
@@ -47,7 +51,6 @@ const routes = [
         name: 'profile',
         component: () => import('@/views/tab/profile.vue'),
       },
-
     ]
   },
 
@@ -56,6 +59,10 @@ const routes = [
     name: 'users',
     component: () => import('@/views/users/index.vue'),
     props: true,
+    beforeEnter: (to, from, next) => {
+      console.log(to, from, '🍊 路由独享守卫:beforeEnter')
+      next()
+    },
     children: [
       {
         path: '/',
@@ -88,5 +95,37 @@ const router = new VueRouter({
   mode: 'history',
   routes
 })
+
+
+/**
+ * 全局前置守卫
+ */
+router.beforeEach((to, from, next) => {
+  if (to.name == 'child') {
+    next({name: 'otherChild'})
+  } else {
+    next()
+  }
+
+  const {meta: {isKeepAlive, requiresAuth}} = to
+
+  console.log('是否递归:' + isKeepAlive, '是否鉴权:' + requiresAuth, '🍊 全局前置守卫:beforeEach')
+})
+
+/**
+ * 全局解析守卫
+ */
+router.beforeResolve((to, from, next) => {
+  console.log(to, from, '🍊 全局解析守卫:beforeResolve')
+  next()
+})
+
+/**
+ * 全局后置钩子(没有next)
+ */
+router.afterEach((to, from) => {
+  console.log(to, from, '🍊 全局后置钩子:afterEach')
+})
+
 
 export default router
