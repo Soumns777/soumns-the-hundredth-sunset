@@ -9,3 +9,42 @@
   background-size: 100%;
   background-image: $image;
 }
+
+/* A02查看详情 完整按钮*/
+@mixin complete-btn() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 631px;
+  height: 68px;
+  background: #3184fe;
+  border-radius: 40.5px;
+  border: 0;
+  color: #f0f6fe;
+}
+
+/* A02查看详情 左边编辑按钮*/
+@mixin left-btn() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 263px;
+  height: 68px;
+  background: #ffffff;
+  border-radius: 40.5px;
+  border: 1px solid #3184fe;
+  color: #3d8bfe;
+}
+
+/* A02查看详情 右边查看详情按钮*/
+@mixin right-btn() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 338px;
+  height: 68px;
+  background: #3184fe;
+  border-radius: 40.5px;
+  border: 0;
+  color: #f1f6fe;
+}

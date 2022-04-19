@@ -3,9 +3,10 @@ import addRouter from '@/add-pinia/index.vue';
 </script>
 
 <template>
-  <div class="container"></div>
-
-  <addRouter />
+  <div class="container">
+    <router-view></router-view>
+    <!-- <addRouter/>-->
+  </div>
 </template>
 
 <style lang="scss" scoped>
