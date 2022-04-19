@@ -1,7 +1,8 @@
 <script setup lang='ts'>
 
-import {onMounted, ref, reactive} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import {onBeforeRouteLeave, useRoute, useRouter} from "vue-router";
+
 
 const props = defineProps({
   home: {
@@ -22,6 +23,13 @@ const route = useRoute()
 
 // console.log(route, '🍊 route')
 // console.log(router, '🍊 router')
+
+const inpRef = ref(null)
+
+
+const change = () => {
+  console.log(inpRef.value, '🍊 inpRef')
+}
 
 
 onMounted(() => {
@@ -46,7 +54,9 @@ onBeforeRouteLeave((to, from, next) => {
 
 <template>
   Home
-  <button class="left-btn" @click="$router.push({name:'list',params:{list:'list',results:'测试数据'}})">HOME</button>
+  <button class="left-btn" @click="$router.push({name:'list',params:{list:'list',results:'测试数据'}})">TO LIST</button>
+
+  <input type="text" v-model="inpRef" @input="change">
 </template>
 
 

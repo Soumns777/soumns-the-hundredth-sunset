@@ -1,10 +1,12 @@
-<script setup lang="ts">
-import addRouter from '@/add-pinia/index.vue';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="container">
-    <router-view></router-view>
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component"></component>
+      </keep-alive>
+    </router-view>
     <!-- <addRouter/>-->
   </div>
 </template>

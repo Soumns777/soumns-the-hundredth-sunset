@@ -29,7 +29,7 @@ console.log(props.list, props.results, '🍎 list')
 
 <template>
   List
-  <button class="left-btn" @click="$router.push({name:'home',params:{home:'home'}})">LIST</button>
+  <button class="left-btn" @click="$router.push({name:'home',params:{home:'home'}})">TO HOME</button>
 
   <button class="left-btn" @click="$router.push({name:'list',params:{list:'list',results:'测试数据11'}})">
     onBeforeRouteUpdate
@@ -39,7 +39,8 @@ console.log(props.list, props.results, '🍎 list')
 
 <style lang="scss" scoped>
 .left-btn {
-  @include left-btn()
+  @include left-btn();
+  margin-bottom: 30px;
 }
 
 </style>

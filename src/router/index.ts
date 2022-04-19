@@ -13,7 +13,6 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/home/index.vue'),
     props: true
   },
-
   {
     path: '/list/:results',
     name: 'list',
