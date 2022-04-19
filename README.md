@@ -1,7 +1,5 @@
 ## :blue_heart::blue_heart:  第一百次日落(Vue3-TS-Vite-Pinia)
 
-
-
 #### :sweat_drops: For
 
 + 记录从第一天日落到第一百天日落
@@ -25,9 +23,7 @@ pnpm dev
 pnpm build
 ```
 
-
-
-#### 一、添加Vue-Router ![Vue-Router]( https://img.shields.io/badge/Version-Vue--Router3-green )   ![](https://img.shields.io/badge/node->%3D14.18.0-brightgreen) ![](https://img.shields.io/badge/npm->%3D6.14.15-blue) 
+#### 一、添加Vue-Router ![Vue-Router]( https://img.shields.io/badge/Version-Vue--Router3-green )   ![](https://img.shields.io/badge/node->%3D14.18.0-brightgreen) ![](https://img.shields.io/badge/npm->%3D6.14.15-blue)
 
 ###### 1.路由模式
 
@@ -38,6 +34,8 @@ pnpm build
 ###### 4.命名路由
 
 ###### 5.路由守卫
+
+###### 6.组件守卫
 
 
 
