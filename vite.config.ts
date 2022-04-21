@@ -9,7 +9,11 @@ function pathResolve(dir: any) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue({
+      reactivityTransform: true, // 可以支持 $ref 语法糖
+    }),
+  ],
   resolve: {
     alias: [
       // @/xx => src/xx

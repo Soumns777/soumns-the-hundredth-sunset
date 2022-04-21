@@ -2,6 +2,9 @@
 import { provide, ref, InjectionKey } from 'vue';
 import { BgColorKey } from './types';
 
+import home from '@/views/home/index.vue';
+import { deflate } from 'zlib';
+
 const colorRef = ref('#ff6100');
 
 const setColor = (color: string): void => {
@@ -16,15 +19,15 @@ provide(BgColorKey, {
 
 <template>
   <div class="container">
-    <div class="container-bg"></div>
+    <!-- <div class="container-bg"></div> -->
     <router-view v-slot="{ Component }">
-      <keep-alive>
+      <keep-alive :include="['home']">
         <component :is="Component"></component>
       </keep-alive>
     </router-view>
 
     <!-- <router-view></router-view>-->
-    <!-- <addRouter/>-->
+    <!-- <addRouter></addRouter> -->
   </div>
 </template>
 

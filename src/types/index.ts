@@ -9,6 +9,9 @@ export interface BgColor {
   setColor: Function;
 }
 
-const BgColorKey: InjectionKey<BgColor> = Symbol('BgColor');
+export const BgColorKey: InjectionKey<BgColor> = Symbol('BgColor');
 
-export { BgColorKey };
+export interface IPerson {
+  name: string;
+  age: number;
+}

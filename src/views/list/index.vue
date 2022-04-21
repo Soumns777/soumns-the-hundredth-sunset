@@ -26,6 +26,12 @@ console.log(props.list, props.results, '🍎 list');
 const inpRef = ref('');
 </script>
 
+<script lang="ts">
+export default {
+  name: 'list',
+};
+</script>
+
 <template>
   List
   <button

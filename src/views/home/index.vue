@@ -2,6 +2,7 @@
 import { inject, onMounted, reactive, ref, Ref } from 'vue';
 import { onBeforeRouteLeave, useRoute, useRouter } from 'vue-router';
 import { BgColor, BgColorKey } from '@/types';
+
 const props = defineProps({
   home: {
     required: false,
@@ -56,9 +57,14 @@ onBeforeRouteLeave((to, from, next) => {
 
 // 使用 as 类型解决undefined
 const { color, setColor } = inject(BgColorKey) as BgColor;
-console.log(color, '💚 provide inject');
 
 console.log(color, '🍊 provide、inject');
+</script>
+
+<script lang="ts">
+export default {
+  name: 'home',
+};
 </script>
 
 <template>
