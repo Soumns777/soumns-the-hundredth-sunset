@@ -14,6 +14,8 @@ const props = defineProps({
   },
 });
 
+// console.log(props.countRef, props.otherRef, '🌈 defineProps');
+
 // 二、使用interface控制defineProps 接收类型
 // interface IProps {
 //   countRef?: string;
@@ -44,8 +46,6 @@ const changeOther = () => {
   emits('update:otherRef', 666);
 };
 
-// const exposeRef: Ref<string> = ref('expose');
-
 const sonExpose: Ref<string> = ref('sonExpose');
 
 defineExpose({
@@ -58,6 +58,8 @@ defineExpose({
     <button class="left-btn" @click="change">change</button>
 
     <button class="left-btn" @click="changeOther">changeOther</button>
+
+    {{ countRef }} -- {{ otherRef }}
   </div>
 </template>
 
