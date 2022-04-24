@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import { reactive, toRefs, ref, Ref, ReactiveEffect } from 'vue';
+import { reactive, toRefs, ref, Ref, ReactiveEffect, onMounted } from 'vue';
+import praChild from '@/views/pra/child.vue';
 import { $ref } from 'vue/macros';
 import { IPerson } from '@/types';
-
-let totalRef: Ref<string | number> = ref('77');
 
 let total: IPerson = reactive({
   name: 'yoona',
@@ -18,7 +17,18 @@ let count: number = $ref(10);
 count++;
 
 console.log(count, '$ref 响应式语法糖');
+
+const countRef: Ref<string> = ref('pra-child');
+
+const otherRef: Ref<number> = ref(999);
+
+const fatherRef = ref<InstanceType<typeof praChild> | null>(null);
+
+onMounted(() => {
+  console.log(fatherRef.value?.sonExpose, '🍊 defineExpose');
+});
 </script>
+
 <script lang="ts">
 export default {
   name: 'pra',
@@ -33,7 +43,14 @@ export default {
       TO HOME
     </button>
 
-    {{ totalRef }}
+    <input type="text" v-model="countRef" />
+    <input type="number" v-model="otherRef" />
+
+    <praChild
+      v-model:countRef="countRef"
+      v-model:otherRef="otherRef"
+      ref="fatherRef"
+    />
   </div>
 </template>
 

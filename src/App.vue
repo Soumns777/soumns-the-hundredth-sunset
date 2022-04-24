@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { provide, ref, InjectionKey } from 'vue';
+import { provide, ref, Ref, InjectionKey } from 'vue';
 import { BgColorKey } from './types';
-
+import addRouter from '@/views/add-pinia/index.vue';
+import { $ref } from 'vue/macros';
 import home from '@/views/home/index.vue';
 import { deflate } from 'zlib';
 
@@ -26,8 +27,7 @@ provide(BgColorKey, {
       </keep-alive>
     </router-view>
 
-    <!-- <router-view></router-view>-->
-    <!-- <addRouter></addRouter> -->
+    <!-- <addRouter  /> -->
   </div>
 </template>
 

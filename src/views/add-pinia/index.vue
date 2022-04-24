@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { reactive } from 'vue';
-import { useStore } from '@/store/index';
+import { reactive, toRef, Ref, toRefs } from 'vue';
+import { useStore } from '../../store';
 import { storeToRefs } from 'pinia';
 
 const store = useStore();
