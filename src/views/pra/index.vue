@@ -57,10 +57,27 @@ const countRef: Ref<string> = ref('pra-child');
 
 const otherRef: Ref<number> = ref(999);
 
+const others = '111';
+
 const fatherRef = ref<InstanceType<typeof praChild> | null>(null);
 
+const native = reactive({
+  website: 'golden state',
+});
+
+const website = toRef(native, 'website');
+
+function func(prop: Ref<string>): void {
+  prop.value += '  fly';
+  console.log(prop.value, '🍉');
+}
+
+func(website);
+
+console.log(native.website, '🍉'); // golden state
+
 onMounted(() => {
-  // console.log(fatherRef.value?.sonExpose, '🍊 defineExpose');
+  console.log(fatherRef.value?.sonExpose, '🍊 defineExpose');
 });
 </script>
 
@@ -86,10 +103,11 @@ export default {
 
     <input type="text" v-model="countRef" />
     <input type="number" v-model="otherRef" />
-
+    <input type="number" v-model="others" />
     <praChild
       v-model:countRef="countRef"
       v-model:otherRef="otherRef"
+      v-model:others="others"
       ref="fatherRef"
     />
   </div>

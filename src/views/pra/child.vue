@@ -12,6 +12,10 @@ const props = defineProps({
     type: Number,
     required: false,
   },
+  others: {
+    type: String,
+    required: false,
+  },
 });
 
 // console.log(props.countRef, props.otherRef, '🌈 defineProps');
@@ -59,7 +63,7 @@ defineExpose({
 
     <button class="left-btn" @click="changeOther">changeOther</button>
 
-    {{ countRef }} -- {{ otherRef }}
+    {{ countRef }} -- {{ otherRef }} -- {{ others }}
   </div>
 </template>
 
