@@ -12,6 +12,7 @@ import praChild from '@/views/pra/child.vue';
 import { $ref, $ } from 'vue/macros';
 import { IPerson } from '@/types';
 
+// FIXME: reactive
 interface IHomeWork {
   results: Array<number>;
   math: string;
@@ -47,19 +48,6 @@ console.log(reactive(person) === personProxy); // true
 
 // 对已经是一个对象的代理使用代理返回的数据也是一致的
 console.log(reactive(personProxy) === personProxy); // true
-let count: number = $ref(10);
-
-count++;
-
-// console.log(count, '$ref 响应式语法糖');
-
-const countRef: Ref<string> = ref('pra-child');
-
-const otherRef: Ref<number> = ref(999);
-
-const others = '111';
-
-const fatherRef = ref<InstanceType<typeof praChild> | null>(null);
 
 const native = reactive({
   website: 'golden state',
@@ -73,9 +61,69 @@ function func(prop: Ref<string>): void {
 }
 
 func(website);
-
 console.log(native.website, '🍉'); // golden state
 
+// reactive 深层响应性
+let proxyDeep: any = reactive({});
+const golden = {};
+proxyDeep.golden = golden;
+
+console.log(
+  proxyDeep.golden,
+  golden,
+  proxyDeep.golden === golden,
+  '💙 深层响应'
+); // proxy{}  {}  false
+
+// reactive 重置代理
+let classmate = reactive({
+  name: 'yoona',
+});
+classmate = reactive({
+  name: 'iu',
+});
+
+console.log(classmate, '🍊 reactive重置代理');
+
+// FIXME: ref
+
+const numRef: Ref<number> = ref(7);
+console.log(numRef.value);
+
+//  $ref 语法糖
+let count: number = $ref(10);
+count++;
+console.log(count, '🍊 $ref 响应式语法糖');
+
+// 对象解构出ref不会失去响应性
+const animal: {
+  name: Ref<string>;
+  age: Ref<number>;
+} = {
+  name: ref('taidi'),
+  age: ref(7),
+};
+
+let { name, age } = animal;
+
+name.value = 'keji';
+age.value = 8;
+
+type Name = typeof name; // Ref<string> 没有失去响应性
+type Age = typeof age; // Ref<number> 没有失去响应性
+console.log(animal.name, animal.age, '🍊 ref 解构'); // proxy{}  proxy{}
+
+function changeNmae(name: Ref<string>) {
+  name.value = 'xueqiaoquan';
+  console.log(animal.name, '🍊  ref作为函数参数'); // proxy{} 没有失去响应性
+}
+
+changeNmae(animal.name);
+
+const countRef: Ref<string> = ref('pra-child');
+const otherRef: Ref<number> = ref(999);
+const others = '111';
+const fatherRef = ref<InstanceType<typeof praChild> | null>(null);
 onMounted(() => {
   console.log(fatherRef.value?.sonExpose, '🍊 defineExpose');
 });
