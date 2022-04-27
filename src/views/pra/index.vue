@@ -9,7 +9,7 @@ import {
   onMounted,
 } from 'vue';
 import praChild from '@/views/pra/child.vue';
-import { $ref, $ } from 'vue/macros';
+import { $ref, $, $$ } from 'vue/macros';
 import { IPerson } from '@/types';
 
 // FIXME: reactive
@@ -90,11 +90,6 @@ console.log(classmate, '🍊 reactive重置代理');
 const numRef: Ref<number> = ref(7);
 console.log(numRef.value);
 
-//  $ref 语法糖
-let count: number = $ref(10);
-count++;
-console.log(count, '🍊 $ref 响应式语法糖');
-
 // 对象解构出ref不会失去响应性
 const animal: {
   name: Ref<string>;
@@ -120,6 +115,33 @@ function changeNmae(name: Ref<string>) {
 
 changeNmae(animal.name);
 
+// ref解包
+const jiebaoRef: Ref<string> = ref('解包');
+
+// 深层响应式对象里的ref会自动解包,导致ref类型是解包后的string
+const jiebaoRef1: {
+  steal: string;
+} = reactive({
+  steal: ref('深层解包'),
+});
+
+// 不是深层响应式对象不会发生解包
+const jiebaoRef2: {
+  steal: Ref<string>;
+} = {
+  steal: ref('深层解包'),
+};
+
+const { steal } = jiebaoRef2;
+
+//  $ref 语法糖
+let count: number = $ref(10);
+count++;
+console.log(count, '🍊 $ref 响应式语法糖');
+// $$ 恢复 $ref 的类型
+const yoona = $ref('yoona');
+changeNmae($$(yoona));
+
 const countRef: Ref<string> = ref('pra-child');
 const otherRef: Ref<number> = ref(999);
 const others = '111';
@@ -140,6 +162,10 @@ export default {
     Pra
 
     {{ math }} -- {{ english }}
+
+    {{ jiebaoRef }} -- {{ jiebaoRef1.steal }} -- {{ jiebaoRef2.steal }} --{{
+      steal
+    }}
 
     <ul>
       <li v-for="(item, idx) in homeWork.results" :key="idx">{{ item }}</li>
