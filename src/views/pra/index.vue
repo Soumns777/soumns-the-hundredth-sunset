@@ -134,6 +134,18 @@ const jiebaoRef2: {
 
 const { steal } = jiebaoRef2;
 
+// ref 重新赋值会替换之前的ref对象
+const reviewRef = ref('review');
+
+const reviewRef1 = ref('review1');
+
+let otherReview = reviewRef;
+otherReview = reviewRef1;
+
+reviewRef.value = 'review change';
+
+console.log(otherReview, '🍊 ref重新赋值'); // proxy{} review1 不会失去响应性,可以被替换
+
 //  $ref 语法糖
 let count: number = $ref(10);
 count++;
