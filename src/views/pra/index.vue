@@ -7,10 +7,12 @@ import {
   Ref,
   ReactiveEffect,
   onMounted,
+  onUnmounted,
 } from 'vue';
 import praChild from '@/views/pra/child.vue';
 import { $ref, $, $$ } from 'vue/macros';
 import { IPerson } from '@/types';
+import { useMouse } from '@/utils/useMouse';
 
 // FIXME: reactive
 interface IHomeWork {
@@ -113,7 +115,7 @@ function changeNmae(name: Ref<string>) {
   console.log(animal.name, '🍊  ref作为函数参数'); // proxy{} 没有失去响应性
 }
 
-changeNmae(animal.name);
+// changeNmae(animal.name);
 
 // ref解包
 const jiebaoRef: Ref<string> = ref('解包');
@@ -154,6 +156,9 @@ console.log(count, '🍊 $ref 响应式语法糖');
 const yoona = $ref('yoona');
 changeNmae($$(yoona));
 
+// 使用 $ref + $$ 作为函数的返回值(利用$ref语法糖创建ref对象,并用$$避免响应式语法糖的类型问题)
+const { x, y } = useMouse();
+
 const countRef: Ref<string> = ref('pra-child');
 const otherRef: Ref<number> = ref(999);
 const others = '111';
@@ -178,6 +183,8 @@ export default {
     {{ jiebaoRef }} -- {{ jiebaoRef1.steal }} -- {{ jiebaoRef2.steal }} --{{
       steal
     }}
+
+    x:{{ x }},y:{{ y }}
 
     <ul>
       <li v-for="(item, idx) in homeWork.results" :key="idx">{{ item }}</li>
