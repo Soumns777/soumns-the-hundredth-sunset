@@ -10,7 +10,7 @@ import {
   onUnmounted,
 } from 'vue';
 import praChild from '@/views/pra/child.vue';
-import { $ref, $, $$ } from 'vue/macros';
+import { $ref, $, $$, $toRef, $computed } from 'vue/macros';
 import { IPerson } from '@/types';
 import { useMouse } from '@/utils/useMouse';
 
@@ -152,13 +152,45 @@ console.log(otherReview, '🍊 ref重新赋值'); // proxy{} review1 不会失�
 let count: number = $ref(10);
 count++;
 console.log(count, '🍊 $ref 响应式语法糖');
-// $$ 恢复 $ref 的类型
+// $$ 恢复 $ref 的类型,作为函数的参数
 const yoona = $ref('yoona');
 changeNmae($$(yoona));
 
 // 使用 $ref + $$ 作为函数的返回值(利用$ref语法糖创建ref对象,并用$$避免响应式语法糖的类型问题)
-const { x, y } = useMouse();
+const { x, y } = $(useMouse());
+console.log('x:', x, 'y:', y);
 
+// 可以使用 $$将$ref创建的响应式对象重新转为Ref类型
+function useLocation() {
+  let lat = $ref(0);
+  let lon = $ref(0);
+
+  return new Promise((resolve, reject) => {
+    resolve(
+      $$({
+        lat,
+        lon,
+      })
+    );
+  });
+}
+useLocation().then((res) => {
+  console.log(res, '🍊 location');
+});
+
+// 当返回
+function useEverything() {
+  return ref({
+    a: 1,
+    b: 2,
+  });
+}
+
+let everything = useEverything();
+
+console.log(everything, '🍊 everything');
+
+// 组件传值
 const countRef: Ref<string> = ref('pra-child');
 const otherRef: Ref<number> = ref(999);
 const others = '111';

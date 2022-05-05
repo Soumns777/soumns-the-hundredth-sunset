@@ -5,7 +5,7 @@ import type { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: { name: 'pra' },
+    redirect: { name: 'useComputed' },
   },
   {
     path: '/home',
@@ -23,6 +23,13 @@ const routes: RouteRecordRaw[] = [
     path: '/pra',
     name: 'pra',
     component: () => import('@/views/pra/index.vue'),
+    props: true,
+  },
+
+  {
+    path: '/useComputed',
+    name: 'useComputed',
+    component: () => import('@/views/use-computed/index.vue'),
     props: true,
   },
 ];
