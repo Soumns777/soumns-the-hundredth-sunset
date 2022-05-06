@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { type } from 'os';
 import {
   reactive,
   toRef,
@@ -9,9 +8,20 @@ import {
   ReactiveEffect,
   onMounted,
   onUnmounted,
+  watch,
+  watchEffect,
+  watchPostEffect,
 } from 'vue';
 
 import { $ref, $, $$, $toRef, $computed } from 'vue/macros';
+
+import {
+  SmileTwoTone,
+  HeartTwoTone,
+  CheckCircleTwoTone,
+} from '@ant-design/icons-vue';
+
+import { AlarmClock } from '@element-plus/icons-vue';
 
 // ref语法糖
 let person = reactive({
@@ -65,23 +75,27 @@ let starHigh = $computed<IStarCom>(() => {
 
 // 这里因为computed返回的是一个ref对象,所以需要从.value提取出project和star属性
 const { project, star } = starHigh;
-console.log(project, star); // Ref Ref
+console.log(project, star, '🍉 computed'); // Ref Ref
 
+//  function 页面每次刷新都会重新计算,消耗性能
 function starHigh1() {
-  let star = $ref(0);
-  let project = $ref('');
+  let star1 = $ref(0);
+  let project1 = $ref('');
   for (const key in stars) {
-    if (stars[key] > star) {
-      star = stars[key];
-      project = key;
+    if (stars[key] > star1) {
+      star1 = stars[key];
+      project1 = key;
     }
   }
 
   return $$({
-    project,
-    star,
+    project1,
+    star1,
   });
 }
+
+let { project1, star1 } = starHigh1();
+console.log(project1, star1, '🍉 function'); // Ref Ref
 
 // function遍历对象
 function compare<T extends IStar>(project: T) {
@@ -91,11 +105,131 @@ function compare<T extends IStar>(project: T) {
 }
 
 compare(stars);
+
+// computed getter setter 可写计算属性
+let firstName = $ref('Stephen');
+let lastName = $ref('Curry');
+let fullName = $computed({
+  get() {
+    return firstName + '-' + lastName;
+  },
+  // fullName更改时会触发计算属性的setter,从而将最新的值赋值给firstName和lastName
+  set(newVal: string) {
+    [firstName, lastName] = newVal.split(' ');
+  },
+});
+
+setTimeout(() => {
+  fullName = 'Lebron James';
+}, 1000);
+
+// watch
+let ageVal = $ref('');
+let completeDesc = $ref('');
+let iu = reactive({
+  age: 19,
+});
+
+const stopWatchAgeVal = watch(
+  // () => iu.age,
+  () => ageVal,
+  (newVal, oldVal) => {
+    if (newVal.length % 2 == 0 && newVal.length != 0) {
+      completeDesc = ' iu今年' + newVal + '岁了';
+    } else {
+      completeDesc = 'Error!';
+    }
+  },
+  { immediate: true }
+);
+
+// 清除定时器
+// setTimeout(() => {
+//   stopWatchAgeVal();
+// }, 3000);
+
+const exaRef = ref('');
+let example = reactive({
+  age: 17,
+});
+let example1 = $ref(11);
+let example2 = $ref(22);
+
+// 监听一个ref
+watch(
+  exaRef,
+  (newValue, oldValue) => {
+    console.log(newValue, oldValue, '🍓 watch ref'); // exaRef
+  },
+  {
+    immediate: true,
+  }
+);
+
+// 监听函数返回值,即getter函数
+watch(
+  () => example1 + example2,
+  (newValue, oldValue) => {
+    console.log(newValue, oldValue, '🍓 watch getter function '); // 333 33
+  },
+  {
+    immediate: true,
+  }
+);
+
+// 监听一个响应式对象
+watch(
+  example,
+  // 响应式对象的新值改变,旧的值也会跟着改变
+  (newValue, oldValue) => {
+    console.log(newValue, oldValue, '🍓 watch reactive'); // Proxy{age:23}  Proxy{age:23}
+  },
+  {
+    immediate: true,
+  }
+);
+
+// 监听一个响应式对象的属性时需要用getter函数,不能直接进行监听
+watch(
+  () => example.age,
+  (newValue, oldValue) => {
+    console.log(newValue, oldValue, '🍓 watch reactive property'); // 23 17
+  },
+  {
+    immediate: true,
+  }
+);
+
+// 监听一个由以上属性构成的数组
+watch(
+  [exaRef, () => example1 + example2, example, () => example.age],
+  (newValue, oldValue) => {
+    console.log(newValue, oldValue, '🍓 watch all property'); // ['exaRef',333,Proxy{age:23},23]
+  },
+  {
+    immediate: true,
+  }
+);
+
+setTimeout(() => {
+  example.age = 23;
+  example1 = 111;
+  example2 = 222;
+  exaRef.value = 'exaRef';
+}, 1000);
 </script>
 
 <template>
   <div>{{ project }}⭐{{ star }}</div>
-  <div>{{ starHigh1().project.value }}⭐{{ starHigh1().star.value }}</div>
+  <div>{{ project1 }}⭐{{ star1 }}</div>
+
+  <a-input v-model:value="ageVal" />
+  <a-input v-model:value="iu.age" />
+
+  <div>{{ completeDesc }}</div>
+  <div>
+    {{ fullName }}
+  </div>
 </template>
 
 <style scoped lang="scss"></style>
