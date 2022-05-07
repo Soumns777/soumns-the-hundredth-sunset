@@ -217,6 +217,37 @@ setTimeout(() => {
   example2 = 222;
   exaRef.value = 'exaRef';
 }, 1000);
+
+// watchEffect 会自动追踪副作用的依赖关系,自动分析出响应源
+watchEffect((onClearUp) => {
+  const timer = setInterval(() => {
+    document.title = (iu.age * 2).toString();
+  }, 1000);
+
+  onClearUp(() => clearInterval(timer));
+});
+
+const API_URL = 'http://127.0.0.1:3001';
+let url = $ref('/');
+let list = $ref({
+  status: 0,
+  msg: '',
+});
+
+watchEffect(async () => {
+  list = await (await fetch(`${API_URL}${url}`)).json();
+  console.log(list.status, '🍋 watchEffect fetch');
+});
+
+let list1 = $ref({});
+watchPostEffect(() => {
+  fetch(`http://127.0.0.1:3001${url}`)
+    .then((res) => res.json())
+    .then((data) => {
+      list1 = data;
+      console.log(list1, 'watchPostEffect');
+    });
+});
 </script>
 
 <template>
@@ -225,11 +256,13 @@ setTimeout(() => {
 
   <a-input v-model:value="ageVal" />
   <a-input v-model:value="iu.age" />
+  <a-input v-model:value="url" />
 
   <div>{{ completeDesc }}</div>
   <div>
     {{ fullName }}
   </div>
+  <div>{{ list.status }} -- {{ list.msg }}</div>
 </template>
 
 <style scoped lang="scss"></style>
