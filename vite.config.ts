@@ -7,14 +7,14 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
-import path from 'path';
+
 import Inspect from 'vite-plugin-inspect';
 
 // import { resolve } from 'path';
 // function pathResolve(dir: any) {
 //   return resolve(process.cwd(), '.', dir);
 // }
-
+import path from 'path';
 const pathSrc = path.resolve(__dirname, 'src');
 
 // https://vitejs.dev/config/
