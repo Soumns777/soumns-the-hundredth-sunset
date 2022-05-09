@@ -1,16 +1,35 @@
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import { computed, reactive } from 'vue';
 import { $ref } from 'vue/macros';
 
 const background = $ref('#1a1a1a');
 const isShowBg = $ref(true);
+
+// 可以给class属性绑定一个computed,返回样式对象
+const differentClass = computed(() => {
+  return {
+    container: isShowBg ? 'container' : '',
+  };
+});
+
+// 可以给style绑定一个函数多种样式的对象
+const styleObject = reactive({
+  backgroundColor: 'skyblue',
+  width: '100%',
+  height: '400px',
+  color: 'springgreen',
+});
 </script>
 
 <template>
+  <!-- :class="differentClass" -->
+  <!-- :class="isShowBg ? 'container' : ''" -->
   <div
-    :class="isShowBg ? 'container' : ''"
-    :style="{ backgroundColor: '#ff6100' }"
+    :style="{
+      color: 'springgreen',
+    }"
   >
+    111
     <button
       round
       class="el-btn"
