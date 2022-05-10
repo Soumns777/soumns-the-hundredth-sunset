@@ -104,6 +104,7 @@ console.log(
   '🍏 find'
 );
 
+// TODO 数组api
 // findIndex 返回值:返回一个第一个符合条件的元素的索引,如果没有符合的话则返回undefined
 console.log(
   array.findIndex((item) => {
@@ -120,3 +121,46 @@ console.log(array.slice(1, 2), '🍏 slice');
 
 console.log(array.splice(1, 2, '888'), '🍏 splice');
 console.log(array);
+
+// 判断是否是一个数组
+console.log(Array.prototype.isPrototypeOf(array), '🔥 isPrototypeOf'); // true
+console.log(Array.isArray(array), '🔥 isArray'); // true
+console.log(Object.prototype.toString.call([]) == '[object Array]'); // true
+
+// 数组的排序
+console.log([1].concat([2, 3]), '🔥 concat'); // [1, 2, 3]
+console.log([1, 2, 3, 4].reverse(), '🔥 reverse'); // [4,3,2,1]
+
+// 升序
+console.log([6, 8, 7, 4].sort(), '🔥 sort'); // [4,6,7,8]
+
+// 降序
+console.log(
+  [6, 8, 7, 4].sort((a, b) => {
+    return b - a;
+  }),
+  '🔥 sort'
+); // [8, 7, 6, 4]
+
+// push 返回新的数组的长度 改变原数组
+
+let array1 = ['iu', 'lisa', 'yoona'];
+console.log(array1.push(4), '🔥 push');
+console.log(array1); // ['iu', 'lisa', 'yoona',4]
+
+// pop 删除数组最后一项,返回被删除的元素的值  改变原数组
+console.log(array1.pop(), '🔥 pop'); // yoona
+console.log(array1); // ['iu', 'lisa'];
+
+let array2 = ['15', '16', '18'];
+
+// unshift 返回新的数组的长度 改变原数组
+console.log(array2.unshift('99')); // 4
+console.log(array2); // ['99', '15', '16', '18']
+
+// shift 返回被删除的元素的值  改变原数组
+console.log(array2.shift());
+console.log(array2);
+
+// join 将一个数组转为字符串
+console.log([1, 2, 3].join('-'));
