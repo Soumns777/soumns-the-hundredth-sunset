@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Honey!❤🎈</title>
+  </head>
+
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <div id="app">
+      <button
+        :style="{width:'160px',height:'30px',backgroundColor:'#76EEC6',borderRadius:'30px',border:'0',color:'#ffffff'}"
+        @click="count++"
+      >
+        computed-watch
+      </button>
+
+      <div>count:{{count}}</div>
+      <!-- computed -->
+      <div>
+        computed: {{doubleCountCom}} -- {{doubleCountCom}} -- {{doubleCountCom}}
+      </div>
+
+      <div>computed-setter {{transfetCount}}</div>
+    </div>
+
+    <script>
+      new Vue({
+        // 和页面产生联系的节点
+        el: '#app',
+        data() {
+          return {
+            count: 0,
+            person: {
+              name: 'yoona',
+              age: 17,
+            },
+          };
+        },
+
+        computed: {
+          doubleCountCom() {
+            console.log('computed加载');
+            return this.count * 2;
+          },
+          transfetCount: {
+            get(val) {
+              return this.count * 2;
+            },
+            set(val) {
+              this.count = val;
+            },
+          },
+
+          transferName() {
+            return this.person.name;
+          },
+        },
+
+        watch: {
+          count() {
+            console.log('watch加载');
+          },
+          'person.age': {
+            handler(newVal, val) {
+              console.log(newVal, '🍭 age changed');
+            },
+          },
+
+          transferName(newVal) {
+            console.log(newVal, '🍭 name changed');
+          },
+
+          person: {
+            handler(newVal, val) {
+              console.log(newVal, 'age changed');
+            },
+            immediate: true,
+            deep: true,
+          },
+        },
+
+        methods: {},
+        mounted() {
+          this.transfetCount = 11;
+          this.person.age = 19;
+          this.person.name = 'iu';
+        },
+      });
+    </script>
+  </body>
+</html>
