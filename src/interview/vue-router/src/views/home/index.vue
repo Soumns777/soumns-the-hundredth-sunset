@@ -1,31 +1,19 @@
 <template>
   <div class="container">
-
     Home
-    <button class="left-btn"
-            @click="$router.push({name:'list',params:{ list:'list',test:'test',invildList:'invildList'}})">
-      Name-params
-    </button>
+    <button class="left-btn" @click="$router.push({ name: 'list', params: { list: 'list', test: 'test', invildList: 'invildList' } })">Name-params</button>
 
-    <button class="left-btn"
-            @click="$router.push({path:'/list/list/test',query:{ invildList:'invildList'}})">Path-Query
-    </button>
+    <button class="left-btn" @click="$router.push({ path: '/list/list/test', query: { invildList: 'invildList' } })">Path-Query</button>
 
-    <button class="left-btn"
-            @click="$router.push({path:'/profile',query:{ tab:'profile'}})">Props-Func-Query
-    </button>
+    <button class="left-btn" @click="$router.push({ path: '/profile', query: { tab: 'profile' } })">Props-Func-Query</button>
 
-    <button class="left-btn"
-            @click="$router.push({name:'detail',params:{ tab:'detail'}})">Props-Func-Name
-    </button>
-
-
+    <button class="left-btn" @click="$router.push({ name: 'detail', params: { tab: 'detail' } })">Props-Func-Name</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "home",
+  name: 'home',
   data() {
     return {}
   },
@@ -52,7 +40,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 .container {
   width: 100vw;
   min-height: 100vh;
@@ -62,5 +49,4 @@ export default {
     margin-bottom: 30px;
   }
 }
-
 </style>
