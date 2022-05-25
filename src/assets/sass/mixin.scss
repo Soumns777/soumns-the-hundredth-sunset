@@ -60,3 +60,27 @@
   border: 0;
   color: #f1f6fe;
 }
+
+@mixin father-box() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 200px;
+  background: #3d8bfe;
+  border-radius: 30px;
+  border: 0;
+  color: #f1f6fe;
+}
+
+@mixin son-box() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 140px;
+  background: #3dfeb7;
+  border-radius: 30px;
+  border: 0;
+  color: #3d8bfe;
+}
