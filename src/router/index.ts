@@ -5,7 +5,7 @@ import type { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: { name: 'useStyle' },
+    redirect: { name: 'useTeleport' },
   },
   {
     path: '/home',
@@ -36,6 +36,12 @@ const routes: RouteRecordRaw[] = [
     path: '/useStyle',
     name: 'useStyle',
     component: () => import('@/views/use-style/index.vue'),
+    props: true,
+  },
+  {
+    path: '/useTeleport',
+    name: 'useTeleport',
+    component: () => import('@/views/use-teleport/index.vue'),
     props: true,
   },
 ];
