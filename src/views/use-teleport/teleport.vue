@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive, ref, Teleport } from 'vue';
+import { reactive, ref } from 'vue';
 </script>
 
 <template>
